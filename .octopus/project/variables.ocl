@@ -1,0 +1,17 @@
+variable "Exported.Project.IgnoreAllChanges" {
+    value "true" {
+        process = ["runbook/1-serialize-project"]
+    }
+}
+
+variable "productEndpoint" {
+    value "https://#{Octopus.Action[Get Stack Outputs].Output.RestApi}.execute-api.ap-southeast-2.amazonaws.com/#{Octopus.Environment.Name}/api/products" {
+        description = ""
+    }
+}
+
+variable "productHealthEndpoint" {
+    value "https://#{Octopus.Action[Get Stack Outputs].Output.RestApi}.execute-api.ap-southeast-2.amazonaws.com/#{Octopus.Environment.Name}/health/products" {
+        description = ""
+    }
+}
