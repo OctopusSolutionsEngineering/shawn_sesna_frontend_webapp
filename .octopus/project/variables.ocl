@@ -59,7 +59,7 @@ variable "customPrimaryColor" {
 }
 
 variable "overrideTheme" {
-    value {
+    value "default" {
         prompt {
             description = ""
             display_settings = {
