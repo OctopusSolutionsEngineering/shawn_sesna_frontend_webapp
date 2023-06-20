@@ -10,25 +10,6 @@ variable "productHealthEndpoint" {
     }
 }
 
-variable "overrideTheme" {
-    value {
-        prompt {
-            description = ""
-            display_settings = {
-                Octopus.ControlType = "Select"
-                Octopus.SelectOptions = <<-EOT
-                    custom|Custom Theme
-                    blue|Blue
-                    green|Green
-                    pink|Pink
-                    orange|Orange
-                    EOT
-            }
-            label = "Octopub Theme"
-        }
-    }
-}
-
 variable "customPaperColor" {
     value "#dd5900" {
         prompt {
@@ -73,6 +54,26 @@ variable "customPrimaryColor" {
                 Octopus.ControlType = "SingleLineText"
             }
             label = "Custom Primary Color"
+        }
+    }
+}
+
+variable "overrideTheme" {
+    value {
+        prompt {
+            description = ""
+            display_settings = {
+                Octopus.ControlType = "Select"
+                Octopus.SelectOptions = <<-EOT
+                    default|Default Theme
+                    custom|Custom Theme
+                    blue|Blue
+                    green|Green
+                    pink|Pink
+                    orange|Orange
+                    EOT
+            }
+            label = "Octopub Theme"
         }
     }
 }
