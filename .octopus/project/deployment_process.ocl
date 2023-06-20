@@ -154,14 +154,14 @@ step "upload-frontend" {
             Octopus.Action.AwsAccount.Variable = "AWS.Account"
             Octopus.Action.Package.DownloadOnTentacle = "False"
             Octopus.Action.Package.FeedId = "sales-maven-feed"
-            Octopus.Action.Package.PackageId = "com.octopus:frontend-webapp-static"
+            Octopus.Action.Package.PackageId = "com.octopus:octopub-frontend"
         }
         worker_pool = "hosted-ubuntu"
 
         packages {
             acquisition_location = "Server"
             feed = "sales-maven-feed"
-            package_id = "com.octopus:frontend-webapp-static"
+            package_id = "com.octopus:octopub-frontend"
             properties = {
                 SelectionMode = "immediate"
             }
