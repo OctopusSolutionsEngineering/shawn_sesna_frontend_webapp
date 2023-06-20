@@ -93,5 +93,10 @@ variable "productHealthEndpoint" {
 variable "title" {
     value "Octopub" {
         process = ["deployment-process"]
+
+        prompt {
+            description = ""
+            label = "App Title"
+        }
     }
 }
