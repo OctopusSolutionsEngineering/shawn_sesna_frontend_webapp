@@ -9,3 +9,22 @@ variable "productHealthEndpoint" {
         description = ""
     }
 }
+
+variable "overrideTheme" {
+    value {
+        prompt {
+            description = ""
+            display_settings = {
+                Octopus.ControlType = "Select"
+                Octopus.SelectOptions = <<-EOT
+                    custom|Custom Theme
+                    blue|Blue
+                    green|Green
+                    pink|Pink
+                    orange|Orange
+                    EOT
+            }
+            label = "Octopub Theme"
+        }
+    }
+}
