@@ -89,3 +89,9 @@ variable "productHealthEndpoint" {
         process = ["deployment-process"]
     }
 }
+
+variable "title" {
+    value "Octopub" {
+        process = ["deployment-process"]
+    }
+}
