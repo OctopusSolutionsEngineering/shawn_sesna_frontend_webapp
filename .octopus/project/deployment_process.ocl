@@ -80,7 +80,7 @@ step "create-s3-bucket" {
         properties = {
             Octopus.Action.Aws.AssumeRole = "False"
             Octopus.Action.Aws.CloudFormation.Tags = "[{\"key\":\"OctopusTenantId\",\"value\":\"#{if Octopus.Deployment.Tenant.Id}#{Octopus.Deployment.Tenant.Id}#{/if}#{unless Octopus.Deployment.Tenant.Id}untenanted#{/unless}\"},{\"key\":\"OctopusStepId\",\"value\":\"#{Octopus.Step.Id}\"},{\"key\":\"OctopusRunbookRunId\",\"value\":\"#{if Octopus.RunBookRun.Id}#{Octopus.RunBookRun.Id}#{/if}#{unless Octopus.RunBookRun.Id}none#{/unless}\"},{\"key\":\"OctopusDeploymentId\",\"value\":\"#{if Octopus.Deployment.Id}#{Octopus.Deployment.Id}#{/if}#{unless Octopus.Deployment.Id}none#{/unless}\"},{\"key\":\"OctopusProjectId\",\"value\":\"#{Octopus.Project.Id}\"},{\"key\":\"OctopusEnvironmentId\",\"value\":\"#{Octopus.Environment.Id}\"},{\"key\":\"Environment\",\"value\":\"#{Octopus.Environment.Name}\"},{\"key\":\"DeploymentProject\",\"value\":\"#{Octopus.Project.Name}\"}]"
-            Octopus.Action.Aws.CloudFormationStackName = "OctopubFrontendS3Bucket-#{Octopus.Environment.Name}"
+            Octopus.Action.Aws.CloudFormationStackName = "#{Octopus.Space.Name | Replace \"[^A-Za-z0-9]\" \"_\"}-OctopubFrontendS3Bucket-#{Octopus.Environment.Name}"
             Octopus.Action.Aws.CloudFormationTemplate = <<-EOT
                 AWSTemplateFormatVersion: 2010-09-09
                 Resources:
@@ -129,6 +129,7 @@ step "create-s3-bucket" {
                 
                 EOT
             Octopus.Action.Aws.CloudFormationTemplateParameters = "[]"
+            Octopus.Action.Aws.CloudFormationTemplateParametersRaw = "[]"
             Octopus.Action.Aws.Region = "#{AWS.Region}"
             Octopus.Action.Aws.TemplateSource = "Inline"
             Octopus.Action.Aws.WaitForCompletion = "True"
@@ -177,7 +178,7 @@ step "proxy-with-api-gateway" {
         properties = {
             Octopus.Action.Aws.AssumeRole = "False"
             Octopus.Action.Aws.CloudFormation.Tags = "[{\"key\":\"OctopusTenantId\",\"value\":\"#{if Octopus.Deployment.Tenant.Id}#{Octopus.Deployment.Tenant.Id}#{/if}#{unless Octopus.Deployment.Tenant.Id}untenanted#{/unless}\"},{\"key\":\"OctopusStepId\",\"value\":\"#{Octopus.Step.Id}\"},{\"key\":\"OctopusRunbookRunId\",\"value\":\"#{if Octopus.RunBookRun.Id}#{Octopus.RunBookRun.Id}#{/if}#{unless Octopus.RunBookRun.Id}none#{/unless}\"},{\"key\":\"OctopusDeploymentId\",\"value\":\"#{if Octopus.Deployment.Id}#{Octopus.Deployment.Id}#{/if}#{unless Octopus.Deployment.Id}none#{/unless}\"},{\"key\":\"OctopusProjectId\",\"value\":\"#{Octopus.Project.Id}\"},{\"key\":\"OctopusEnvironmentId\",\"value\":\"#{Octopus.Environment.Id}\"},{\"key\":\"Environment\",\"value\":\"#{Octopus.Environment.Name}\"},{\"key\":\"DeploymentProject\",\"value\":\"#{Octopus.Project.Name}\"}]"
-            Octopus.Action.Aws.CloudFormationStackName = "OctopubFrontendApiGateway-#{Octopus.Environment.Name}"
+            Octopus.Action.Aws.CloudFormationStackName = "#{Octopus.Space.Name | Replace \"[^A-Za-z0-9]\" \"_\"}-OctopubFrontendApiGateway-#{Octopus.Environment.Name}"
             Octopus.Action.Aws.CloudFormationTemplate = <<-EOT
                 Parameters:
                   EnvironmentName:
@@ -344,6 +345,7 @@ step "proxy-with-api-gateway" {
                 
                 EOT
             Octopus.Action.Aws.CloudFormationTemplateParameters = "[{\"ParameterKey\":\"EnvironmentName\",\"ParameterValue\":\"#{Octopus.Environment.Name}\"},{\"ParameterKey\":\"RestApi\",\"ParameterValue\":\"#{Octopus.Action[Get Stack Outputs].Output.RestApi}\"},{\"ParameterKey\":\"RootResourceId\",\"ParameterValue\":\"#{Octopus.Action[Get Stack Outputs].Output.RootResourceId}\"},{\"ParameterKey\":\"ResourceId\",\"ParameterValue\":\"#{Octopus.Action[Get Stack Outputs].Output.Web}\"},{\"ParameterKey\":\"PackageVersion\",\"ParameterValue\":\"#{Octopus.Action[Upload Frontend].Package[].PackageVersion}\"},{\"ParameterKey\":\"PackageId\",\"ParameterValue\":\"#{Octopus.Action[Upload Frontend].Package[].PackageId}\"},{\"ParameterKey\":\"BucketName\",\"ParameterValue\":\"#{Octopus.Action[Create S3 bucket].Output.AwsOutputs[Bucket]}\"},{\"ParameterKey\":\"SubPath\",\"ParameterValue\":\"\"}]"
+            Octopus.Action.Aws.CloudFormationTemplateParametersRaw = "[{\"ParameterKey\":\"EnvironmentName\",\"ParameterValue\":\"#{Octopus.Environment.Name}\"},{\"ParameterKey\":\"RestApi\",\"ParameterValue\":\"#{Octopus.Action[Get Stack Outputs].Output.RestApi}\"},{\"ParameterKey\":\"RootResourceId\",\"ParameterValue\":\"#{Octopus.Action[Get Stack Outputs].Output.RootResourceId}\"},{\"ParameterKey\":\"ResourceId\",\"ParameterValue\":\"#{Octopus.Action[Get Stack Outputs].Output.Web}\"},{\"ParameterKey\":\"PackageVersion\",\"ParameterValue\":\"#{Octopus.Action[Upload Frontend].Package[].PackageVersion}\"},{\"ParameterKey\":\"PackageId\",\"ParameterValue\":\"#{Octopus.Action[Upload Frontend].Package[].PackageId}\"},{\"ParameterKey\":\"BucketName\",\"ParameterValue\":\"#{Octopus.Action[Create S3 bucket].Output.AwsOutputs[Bucket]}\"},{\"ParameterKey\":\"SubPath\",\"ParameterValue\":null}]"
             Octopus.Action.Aws.Region = "#{AWS.Region}"
             Octopus.Action.Aws.TemplateSource = "Inline"
             Octopus.Action.Aws.WaitForCompletion = "True"
@@ -362,7 +364,7 @@ step "update-stage" {
         properties = {
             Octopus.Action.Aws.AssumeRole = "False"
             Octopus.Action.Aws.CloudFormation.Tags = "[{\"key\":\"OctopusTenantId\",\"value\":\"#{if Octopus.Deployment.Tenant.Id}#{Octopus.Deployment.Tenant.Id}#{/if}#{unless Octopus.Deployment.Tenant.Id}untenanted#{/unless}\"},{\"key\":\"OctopusStepId\",\"value\":\"#{Octopus.Step.Id}\"},{\"key\":\"OctopusRunbookRunId\",\"value\":\"#{if Octopus.RunBookRun.Id}#{Octopus.RunBookRun.Id}#{/if}#{unless Octopus.RunBookRun.Id}none#{/unless}\"},{\"key\":\"OctopusDeploymentId\",\"value\":\"#{if Octopus.Deployment.Id}#{Octopus.Deployment.Id}#{/if}#{unless Octopus.Deployment.Id}none#{/unless}\"},{\"key\":\"OctopusProjectId\",\"value\":\"#{Octopus.Project.Id}\"},{\"key\":\"OctopusEnvironmentId\",\"value\":\"#{Octopus.Environment.Id}\"},{\"key\":\"Environment\",\"value\":\"#{Octopus.Environment.Name}\"},{\"key\":\"DeploymentProject\",\"value\":\"#{Octopus.Project.Name}\"}]"
-            Octopus.Action.Aws.CloudFormationStackName = "OctopubApiGatewayStage-#{Octopus.Environment.Name}"
+            Octopus.Action.Aws.CloudFormationStackName = "#{Octopus.Space.Name | Replace \"[^A-Za-z0-9]\" \"_\"}-OctopubApiGatewayStage-#{Octopus.Environment.Name}"
             Octopus.Action.Aws.CloudFormationTemplate = <<-EOT
                 Parameters:
                   EnvironmentName:
@@ -402,6 +404,7 @@ step "update-stage" {
                 
                 EOT
             Octopus.Action.Aws.CloudFormationTemplateParameters = "[{\"ParameterKey\":\"EnvironmentName\",\"ParameterValue\":\"#{Octopus.Environment.Name}\"},{\"ParameterKey\":\"DeploymentId\",\"ParameterValue\":\"#{Octopus.Action[Proxy with API Gateway].Output.AwsOutputs[DeploymentId]}\"},{\"ParameterKey\":\"ApiGatewayId\",\"ParameterValue\":\"#{Octopus.Action[Get Stack Outputs].Output.RestApi}\"}]"
+            Octopus.Action.Aws.CloudFormationTemplateParametersRaw = "[{\"ParameterKey\":\"EnvironmentName\",\"ParameterValue\":\"#{Octopus.Environment.Name}\"},{\"ParameterKey\":\"DeploymentId\",\"ParameterValue\":\"#{Octopus.Action[Proxy with API Gateway].Output.AwsOutputs[DeploymentId]}\"},{\"ParameterKey\":\"ApiGatewayId\",\"ParameterValue\":\"#{Octopus.Action[Get Stack Outputs].Output.RestApi}\"}]"
             Octopus.Action.Aws.Region = "#{AWS.Region}"
             Octopus.Action.Aws.TemplateSource = "Inline"
             Octopus.Action.Aws.WaitForCompletion = "True"
@@ -437,7 +440,7 @@ step "get-stage-outputs" {
                 
                 STAGE_URL=$(aws cloudformation \
                     describe-stacks \
-                    --stack-name "OctopubApiGatewayStage-#{Octopus.Environment.Name | Replace " .*" ""}" \
+                    --stack-name "#{Octopus.Space.Name | Replace "[^A-Za-z0-9]" "_"}-OctopubApiGatewayStage-#{Octopus.Environment.Name | Replace " .*" ""}" \
                     --query "Stacks[0].Outputs[?OutputKey=='StageURL'].OutputValue" \
                     --output text)
                 
@@ -446,7 +449,7 @@ step "get-stage-outputs" {
                 
                 DNS_NAME=$(aws cloudformation \
                     describe-stacks \
-                    --stack-name "OctopubApiGatewayStage-#{Octopus.Environment.Name | Replace " .*" ""}" \
+                    --stack-name "#{Octopus.Space.Name | Replace "[^A-Za-z0-9]" "_"}-OctopubApiGatewayStage-#{Octopus.Environment.Name | Replace " .*" ""}" \
                     --query "Stacks[0].Outputs[?OutputKey=='DnsName'].OutputValue" \
                     --output text)
                 
