@@ -3,6 +3,7 @@ step "get-stack-outputs" {
 
     action {
         action_type = "Octopus.AwsRunScript"
+        excluded_environments = ["security"]
         properties = {
             Octopus.Action.Aws.AssumeRole = "False"
             Octopus.Action.Aws.Region = "#{AWS.Region}"
@@ -77,6 +78,7 @@ step "create-s3-bucket" {
 
     action {
         action_type = "Octopus.AwsRunCloudFormation"
+        excluded_environments = ["security"]
         properties = {
             Octopus.Action.Aws.AssumeRole = "False"
             Octopus.Action.Aws.CloudFormation.Tags = "[{\"key\":\"OctopusTenantId\",\"value\":\"#{if Octopus.Deployment.Tenant.Id}#{Octopus.Deployment.Tenant.Id}#{/if}#{unless Octopus.Deployment.Tenant.Id}untenanted#{/unless}\"},{\"key\":\"OctopusStepId\",\"value\":\"#{Octopus.Step.Id}\"},{\"key\":\"OctopusRunbookRunId\",\"value\":\"#{if Octopus.RunBookRun.Id}#{Octopus.RunBookRun.Id}#{/if}#{unless Octopus.RunBookRun.Id}none#{/unless}\"},{\"key\":\"OctopusDeploymentId\",\"value\":\"#{if Octopus.Deployment.Id}#{Octopus.Deployment.Id}#{/if}#{unless Octopus.Deployment.Id}none#{/unless}\"},{\"key\":\"OctopusProjectId\",\"value\":\"#{Octopus.Project.Id}\"},{\"key\":\"OctopusEnvironmentId\",\"value\":\"#{Octopus.Environment.Id}\"},{\"key\":\"Environment\",\"value\":\"#{Octopus.Environment.Name}\"},{\"key\":\"DeploymentProject\",\"value\":\"#{Octopus.Project.Name}\"}]"
@@ -149,6 +151,7 @@ step "upload-frontend" {
 
     action {
         action_type = "Octopus.AwsUploadS3"
+        excluded_environments = ["security"]
         properties = {
             Octopus.Action.Aws.AssumeRole = "False"
             Octopus.Action.Aws.Region = "#{AWS.Region}"
@@ -179,6 +182,7 @@ step "proxy-with-api-gateway" {
 
     action {
         action_type = "Octopus.AwsRunCloudFormation"
+        excluded_environments = ["security"]
         properties = {
             Octopus.Action.Aws.AssumeRole = "False"
             Octopus.Action.Aws.CloudFormation.Tags = "[{\"key\":\"OctopusTenantId\",\"value\":\"#{if Octopus.Deployment.Tenant.Id}#{Octopus.Deployment.Tenant.Id}#{/if}#{unless Octopus.Deployment.Tenant.Id}untenanted#{/unless}\"},{\"key\":\"OctopusStepId\",\"value\":\"#{Octopus.Step.Id}\"},{\"key\":\"OctopusRunbookRunId\",\"value\":\"#{if Octopus.RunBookRun.Id}#{Octopus.RunBookRun.Id}#{/if}#{unless Octopus.RunBookRun.Id}none#{/unless}\"},{\"key\":\"OctopusDeploymentId\",\"value\":\"#{if Octopus.Deployment.Id}#{Octopus.Deployment.Id}#{/if}#{unless Octopus.Deployment.Id}none#{/unless}\"},{\"key\":\"OctopusProjectId\",\"value\":\"#{Octopus.Project.Id}\"},{\"key\":\"OctopusEnvironmentId\",\"value\":\"#{Octopus.Environment.Id}\"},{\"key\":\"Environment\",\"value\":\"#{Octopus.Environment.Name}\"},{\"key\":\"DeploymentProject\",\"value\":\"#{Octopus.Project.Name}\"}]"
@@ -365,6 +369,7 @@ step "update-stage" {
 
     action {
         action_type = "Octopus.AwsRunCloudFormation"
+        excluded_environments = ["security"]
         properties = {
             Octopus.Action.Aws.AssumeRole = "False"
             Octopus.Action.Aws.CloudFormation.Tags = "[{\"key\":\"OctopusTenantId\",\"value\":\"#{if Octopus.Deployment.Tenant.Id}#{Octopus.Deployment.Tenant.Id}#{/if}#{unless Octopus.Deployment.Tenant.Id}untenanted#{/unless}\"},{\"key\":\"OctopusStepId\",\"value\":\"#{Octopus.Step.Id}\"},{\"key\":\"OctopusRunbookRunId\",\"value\":\"#{if Octopus.RunBookRun.Id}#{Octopus.RunBookRun.Id}#{/if}#{unless Octopus.RunBookRun.Id}none#{/unless}\"},{\"key\":\"OctopusDeploymentId\",\"value\":\"#{if Octopus.Deployment.Id}#{Octopus.Deployment.Id}#{/if}#{unless Octopus.Deployment.Id}none#{/unless}\"},{\"key\":\"OctopusProjectId\",\"value\":\"#{Octopus.Project.Id}\"},{\"key\":\"OctopusEnvironmentId\",\"value\":\"#{Octopus.Environment.Id}\"},{\"key\":\"Environment\",\"value\":\"#{Octopus.Environment.Name}\"},{\"key\":\"DeploymentProject\",\"value\":\"#{Octopus.Project.Name}\"}]"
@@ -424,6 +429,7 @@ step "get-stage-outputs" {
 
     action {
         action_type = "Octopus.AwsRunScript"
+        excluded_environments = ["security"]
         properties = {
             Octopus.Action.Aws.AssumeRole = "False"
             Octopus.Action.Aws.Region = "#{AWS.Region}"
