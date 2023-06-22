@@ -467,6 +467,7 @@ step "get-stage-outputs" {
                 echo "DNS Name: $DNS_NAME"
                 
                 write_highlight "Open [${STAGE_URL}index.html](${STAGE_URL}index.html) to view the frontend web app."
+                write_highlight "Get the associated [ebook](https://github.com/OctopusSolutionsEngineering/SalesEngineeringAwsLambda/releases/latest/download/lambda.pdf)."
                 
                 EOT
             Octopus.Action.Script.ScriptSource = "Inline"
