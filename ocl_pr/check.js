@@ -7,6 +7,7 @@ const path =require("path")
 const FirstStepName = "Generate GitHub Token"
 const SecondStepName = "Check for Updates"
 const LastStepName = "Vulnerability Scan"
+const ErrorFeedbackStep = "Generate Issue on Failure"
 const ScriptType = "Octopus.Script"
 
 /**
@@ -93,6 +94,14 @@ function checkPr(ocl) {
 
             if (actionType !== ScriptType) {
                 console.log("Last step must be a script step (was " + actionType + ")")
+                resolve(false)
+                return
+            }
+
+            // Find the error reporting step
+            errorStep = steps.filter(s => getUnquotedPropertyValue(s, "name") === ErrorFeedbackStep)
+            if (errorStep.length === 0) {
+                console.log("There must be a step called " + ErrorFeedbackStep)
                 resolve(false)
                 return
             }
