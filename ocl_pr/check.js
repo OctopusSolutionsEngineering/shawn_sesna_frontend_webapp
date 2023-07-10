@@ -99,7 +99,7 @@ function checkPr(ocl) {
             }
 
             // Find the error reporting step
-            errorStep = steps.filter(s => getUnquotedPropertyValue(s, "name") === ErrorFeedbackStep)
+            errorStep = steps.filter(s => getUnquotedPropertyValue(getProperty(s, "name")) === ErrorFeedbackStep)
             if (errorStep.length === 0) {
                 console.log("There must be a step called " + ErrorFeedbackStep)
                 resolve(false)
