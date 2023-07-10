@@ -59,7 +59,7 @@ function checkPr(ocl) {
             const secondStepName = getUnquotedPropertyValue(getProperty(steps[1], "name"))
 
             if (secondStepName !== SecondStepName) {
-                console.log("First step must be called " + SecondStepName + " (was " + secondStepName + ")")
+                console.log("Second step must be called " + SecondStepName + " (was " + secondStepName + ")")
                 resolve(false)
                 return
             }
@@ -68,7 +68,7 @@ function checkPr(ocl) {
             const secondStepActionType = getUnquotedPropertyValue(getProperty(secondStepAction, "action_type"))
 
             if (secondStepActionType !== ScriptType) {
-                console.log("Second step must be a script step (was " + firstStepActionType + ")")
+                console.log("Second step must be a script step (was " + secondStepActionType + ")")
                 resolve(false)
                 return
             }
