@@ -74,6 +74,16 @@ variable "overrideTheme" {
             label = "Octopub Theme"
         }
     }
+
+    value "pink" {
+        description = ""
+        environment = ["test"]
+    }
+
+    value "green" {
+        description = ""
+        environment = ["development"]
+    }
 }
 
 variable "productEndpoint" {
