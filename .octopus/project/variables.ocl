@@ -1,59 +1,3 @@
-variable "customBackgroundColor" {
-    value "#fafafa" {
-        process = ["deployment-process"]
-
-        prompt {
-            description = ""
-            display_settings = {
-                Octopus.ControlType = "SingleLineText"
-            }
-            label = "Custom Background Color"
-        }
-    }
-}
-
-variable "customPaperColor" {
-    value "#dd5900" {
-        process = ["deployment-process"]
-
-        prompt {
-            description = ""
-            display_settings = {
-                Octopus.ControlType = "SingleLineText"
-            }
-            label = "Custom Paper Color"
-        }
-    }
-}
-
-variable "customPrimaryColor" {
-    value "#000000" {
-        process = ["deployment-process"]
-
-        prompt {
-            description = ""
-            display_settings = {
-                Octopus.ControlType = "SingleLineText"
-            }
-            label = "Custom Primary Color"
-        }
-    }
-}
-
-variable "customSecondaryColor" {
-    value "#262626" {
-        process = ["deployment-process"]
-
-        prompt {
-            description = ""
-            display_settings = {
-                Octopus.ControlType = "SingleLineText"
-            }
-            label = "Custom Secondary Color"
-        }
-    }
-}
-
 variable "overrideTheme" {
     value "pink" {
         description = ""
@@ -65,7 +9,7 @@ variable "overrideTheme" {
         environment = ["development"]
     }
 
-    value "default" {
+    value "custom" {
         process = ["deployment-process"]
     }
 }
@@ -92,5 +36,29 @@ variable "title" {
             description = ""
             label = "App Title"
         }
+    }
+}
+
+variable "customBackgroundColor" {
+    value "#fafafa" {
+        process = ["deployment-process"]
+    }
+}
+
+variable "customPaperColor" {
+    value "#dd5900" {
+        process = ["deployment-process"]
+    }
+}
+
+variable "customPrimaryColor" {
+    value "#000000" {
+        process = ["deployment-process"]
+    }
+}
+
+variable "customSecondaryColor" {
+    value "#262626" {
+        process = ["deployment-process"]
     }
 }
