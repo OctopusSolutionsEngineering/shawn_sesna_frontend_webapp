@@ -55,26 +55,6 @@ variable "customSecondaryColor" {
 }
 
 variable "overrideTheme" {
-    value "default" {
-        process = ["deployment-process"]
-
-        prompt {
-            description = ""
-            display_settings = {
-                Octopus.ControlType = "Select"
-                Octopus.SelectOptions = <<-EOT
-                    default|Default Theme
-                    custom|Custom Theme
-                    blue|Blue
-                    green|Green
-                    pink|Pink
-                    orange|Orange
-                    EOT
-            }
-            label = "Octopub Theme"
-        }
-    }
-
     value "pink" {
         description = ""
         environment = ["test"]
@@ -83,6 +63,10 @@ variable "overrideTheme" {
     value "green" {
         description = ""
         environment = ["development"]
+    }
+
+    value "default" {
+        process = ["deployment-process"]
     }
 }
 
