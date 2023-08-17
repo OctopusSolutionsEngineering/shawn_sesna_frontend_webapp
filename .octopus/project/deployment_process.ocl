@@ -63,6 +63,7 @@ step "get-stack-outputs" {
     action {
         action_type = "Octopus.AwsRunScript"
         excluded_environments = ["security"]
+        notes = "Extract values from the CloudFormation stacks."
         properties = {
             Octopus.Action.Aws.AssumeRole = "False"
             Octopus.Action.Aws.Region = "#{AWS.Region}"
